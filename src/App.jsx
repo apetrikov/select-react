@@ -6,7 +6,7 @@ import style from './some.styl';
 const App = () => {
   return (
     <div>
-      <p className="header">Red is here, guys!!</p>
+      <p className="header">React is here, guys!!</p>
     </div>
   );
 };
