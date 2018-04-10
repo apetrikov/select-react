@@ -8,7 +8,7 @@ import Select from 'Select';
 const App = () => {
   return (
     <div>
-      <p className="header">React is here, guys!!!</p>
+      <p className="header">React is here, guys!</p>
       <Select/>
     </div>
   );

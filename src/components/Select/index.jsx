@@ -9,17 +9,22 @@ const mock = {
     'Свияжск',
     'Анапа'
   ],
-  selected: 3
+  search: ''
 };
 
 const Select = () => {
-  const { list = ['Список пуст'], selected = 0} = mock;
+  const { list = ['Список пуст'], search = list[0]} = mock;
+  const filteredList = list.filter(name => name.startsWith(search));
+  const optionsList = filteredList.map((name, i) => (
+    <option key={i} value={name} onClick={() => alert(name)}>{name}</option>
+  ));
   return (
-    <select value={selected}>
-      {list.map((name, i) => (
-        <option key={i} value={i}>{name}</option>
-      ))}
-    </select>
+    <div>
+      <input type="text" list="nameList" value={search}/>
+      <datalist id="nameList">
+        {optionsList}
+      </datalist>
+    </div>
   );
 };
 
