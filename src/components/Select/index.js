@@ -2,16 +2,19 @@ import { connect } from 'react-redux';
 import React from "react";
 
 import { onInput }  from './module';
-import Select from './index';
+import Select from './Select';
 
 function mapStateToProps(state) {
   const { list = ['Список пуст'], search = '' } = state.select;
 
-  const filteredList = list.filter(name => name.startsWith(search));
+  const upperSearch = search && search.charAt(0).toUpperCase() + search.slice(1);
+
+  const filteredList = list.filter(name => name.startsWith(upperSearch));
   const orderedList = filteredList.sort();
   const optionsList = orderedList.map((name, i) => (
     <option key={i} value={name}>{name}</option>
   ));
+
   return {
     optionsList,
     search

@@ -9,8 +9,7 @@ const Select = ({ optionsList = [], search = '', onInput}) => {
         type="text"
         list="nameList"
         value={search}
-        // onClick={(e) => alert('input clicked')}
-        // onChange={(e) => alert('input changed')}
+        placeholder="Выберите страну"
         onInput={(e) => onInput(e.target.value)}
       />
       <datalist id="nameList">

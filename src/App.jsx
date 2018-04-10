@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 
 import style from './some.styl';
 
-import Select from 'Select/container';
+import Select from 'Select';
 
 const App = () => {
   return (
