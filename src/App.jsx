@@ -1,9 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
+
+import { Provider } from 'react-redux';
+
+import configureStore from './store/configureStore';
 
 import style from './some.styl';
 
-import Select from 'Select';
+import Select from 'Select/container';
 
 const App = () => {
   return (
@@ -16,4 +20,11 @@ const App = () => {
 
 export default App;
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const store = configureStore();
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("app")
+);

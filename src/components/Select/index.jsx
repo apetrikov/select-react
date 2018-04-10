@@ -2,25 +2,17 @@ import React from "react";
 
 import style from './select.styl';
 
-const mock = {
-  list: [
-    'Анадырь',
-    'Бобруйск',
-    'Свияжск',
-    'Анапа'
-  ],
-  search: ''
-};
-
-const Select = () => {
-  const { list = ['Список пуст'], search = list[0]} = mock;
-  const filteredList = list.filter(name => name.startsWith(search));
-  const optionsList = filteredList.map((name, i) => (
-    <option key={i} value={name} onClick={() => alert(name)}>{name}</option>
-  ));
+const Select = ({ optionsList = [], search = '', onInput}) => {
   return (
     <div>
-      <input type="text" list="nameList" value={search}/>
+      <input
+        type="text"
+        list="nameList"
+        value={search}
+        // onClick={(e) => alert('input clicked')}
+        // onChange={(e) => alert('input changed')}
+        onInput={(e) => onInput(e.target.value)}
+      />
       <datalist id="nameList">
         {optionsList}
       </datalist>
