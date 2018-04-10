@@ -6,6 +6,10 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['src/components', 'node_modules']
+  },
   module: {
     rules: [
       {
