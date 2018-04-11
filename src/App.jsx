@@ -8,12 +8,14 @@ import configureStore from './store/configureStore';
 import style from './some.styl';
 
 import Select from 'Select';
+import Sample from 'Sample';
 
 const App = () => {
   return (
     <div>
       <p className="header">React is here, guys!</p>
-      <Select/>
+      {/*<Select/>*/}
+      <Sample/>
     </div>
   );
 };
