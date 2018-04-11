@@ -7,12 +7,16 @@ import Select from './Select';
 function mapStateToProps(state) {
   const { list = ['Список пуст'], search = '' } = state.select;
 
-  const upperSearch = search && search.charAt(0).toUpperCase() + search.slice(1);
+  const highlight = (name = '', len = 0) => {
 
+    return `<span className="highlight">${name.slice(0,len)}</span>${name.slice(len)}`;
+  };
+
+  const upperSearch = search && search.charAt(0).toUpperCase() + search.slice(1);
   const filteredList = list.filter(name => name.startsWith(upperSearch));
   const orderedList = filteredList.sort();
   const optionsList = orderedList.map((name, i) => (
-    <option key={i} value={name}>{name}</option>
+    <option className="highlight" key={i} value={name}></option>
   ));
 
   return {
