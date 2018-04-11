@@ -4,18 +4,18 @@ import style from './sample.styl';
 
 const Sample = () => {
   return (
-    <nav className="main-navigation">
-      <ul className="menu">
-        <li className="menu-item-has-children">
-          <input value="ololo"/>
+    <div>
+      <ul className="for-remove">
+        <li className="select">
+          <input placeholder="плейсхолдер" value=""/>
           <ul className="sub-menu">
-            <li><a href="#">Plumbing</a></li>
-            <li><a href="#">Heating</a></li>
-            <li><a href="#">Electrical</a></li>
+            <li><a href="#">Опция 1</a></li>
+            <li><a href="#">Опция 2</a></li>
+            <li><a href="#">Опция 3</a></li>
           </ul>
         </li>
       </ul>
-    </nav>
+    </div>
   );
 };
 

@@ -5,14 +5,14 @@ import { Provider } from 'react-redux';
 
 import configureStore from './store/configureStore';
 
-import style from './some.styl';
+import style from './main.styl';
 
 import Select from 'Select';
 import Sample from 'Sample';
 
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <p className="header">React is here, guys!</p>
       {/*<Select/>*/}
       <Sample/>
