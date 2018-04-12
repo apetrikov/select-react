@@ -1,7 +1,76 @@
-clear = orange
+my-width = 200px;
+my-border = 1px;
 
-.highlight,
-input
-option {
-  color: clear;
+@media (min-width: 800px) {
+  .container{
+    display:flex;
+    flex-direction:column;
+  }
+
+  ul{
+    margin:0; //reset
+    padding:0;
+  }
+
+  .select,
+  .input {
+    width: my-width
+  }
+
+  ///// Стили при наведении на поле ввода
+  // Скрывает список сперва
+  .sub-menu {
+    //display: none;
+    display:block;
+    color:#fff;
+    border: solid my-border black;
+    position:absolute;
+  }
+
+  // Отображает выпадающий список
+  .select:hover > .sub-menu {
+    display:block;
+    color:#fff;
+    border: solid my-border black;
+  }
+
+  // основной цвет фона списка
+  .select:hover > .sub-menu {
+    padding-left:0;
+    background: #ffffff;
+  }
+
+  // Шрифт в списке
+  .select:hover > .sub-menu a{
+    color: #000000;
+  }
+
+  // Стили выпадающего меню
+  .sub-menu {
+    cursor: pointer;
+
+    li{
+      display:block;
+      width: my-width + 2 * my-border;
+      list-style-type:none;
+
+      .highlight {
+        color: orange;
+      }
+    }
+
+    li a{
+      display:flex;
+      text-align:center;
+      text-decoration:none;
+      color:#777;
+      padding:1rem;
+    }
+
+    li a:hover{
+      background:#777;
+      color:#fff;
+    }
+  }
+
 }
