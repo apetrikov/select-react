@@ -11,9 +11,8 @@ import Select from 'Select';
 
 const App = () => {
   return (
-    <div className="container">
-      <p className="header">React is here, guys!</p>
-      <Select/>
+    <div className="main-container">
+      <Select />
     </div>
   );
 };

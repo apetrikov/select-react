@@ -2,29 +2,14 @@ my-width = 200px;
 my-border = 1px;
 
 @media (min-width: 800px) {
-  .container{
-    display:flex;
-    flex-direction:column;
-  }
-
-  ul{
-    margin:0; //reset
-    padding:0;
-  }
+  //.container{
+  //  display:flex;
+  //  flex-direction:column-reverse;
+  //}
 
   .select,
   .input {
     width: my-width
-  }
-
-  ///// Стили при наведении на поле ввода
-  // Скрывает список сперва
-  .sub-menu {
-    //display: none;
-    display:block;
-    color:#fff;
-    border: solid my-border black;
-    position:absolute;
   }
 
   // Отображает выпадающий список
@@ -32,10 +17,8 @@ my-border = 1px;
     display:block;
     color:#fff;
     border: solid my-border black;
-  }
 
-  // основной цвет фона списка
-  .select:hover > .sub-menu {
+    // основной цвет фона списка
     padding-left:0;
     background: #ffffff;
   }
@@ -47,6 +30,15 @@ my-border = 1px;
 
   // Стили выпадающего меню
   .sub-menu {
+    // Скрывает список сперва
+    //display: none;
+    display:block;
+    color:#fff;
+    border: solid my-border black;
+    position:absolute;
+
+    margin:0; //reset
+    padding:0;
     cursor: pointer;
 
     li{
