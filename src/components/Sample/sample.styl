@@ -1,55 +1,67 @@
-ul{
-  margin:0; //reset
-  padding:0;
-}
-
-// Отображает выпадающий список
-.select:hover > ul {
-  display:block;
-  color:#fff;
-}
-
-.sub-menu {
-  // Стили выпадающего меню
-  li{
-    display:block;
-    list-style-type:none;
-    text-transform:uppercase;
-  }
-
-  li a{
-    display:flex;
-    text-align:center;
-    text-decoration:none;
-    color:#777;
-    padding:1rem;
-  }
-
-  li a:hover{
-    background:#777;
-    color:#fff;
-  }
-}
+my-width = 200px;
 
 @media (min-width: 800px) {
+  .container{
+    display:flex;
+    flex-direction:column;
+  }
+
+  ul{
+    margin:0; //reset
+    padding:0;
+  }
+
+  .select,
+  .input {
+    width: my-width
+  }
+
+  ///// Стили при наведении на поле ввода
   // Скрывает список сперва
-  .select ul {
+  .sub-menu {
     display: none;
     position:absolute;
   }
 
+  // Отображает выпадающий список
   .select:hover > ul {
-    padding-left:0;
-    background:#777;
+    display:block;
+    color:#fff;
   }
 
+  // основной цвет фона списка
+  .select:hover > ul {
+    padding-left:0;
+    //background:#777;
+    background: #313131;
+  }
+
+  // Шрифт в списке
   .select:hover > ul a{
     color:#fff;
   }
 
-  .for-remove{
-    display:flex;
-    flex-direction:column;
+  // Стили выпадающего меню
+  .sub-menu {
+    li{
+      display:block;
+      width: my-width + 4px;
+      list-style-type:none;
+      text-transform:uppercase;
+    }
+
+    li a{
+      display:flex;
+      text-align:center;
+      text-decoration:none;
+      color:#777;
+      padding:1rem;
+    }
+
+    li a:hover{
+      background:#777;
+      color:#fff;
+    }
   }
 
 }
