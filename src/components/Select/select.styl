@@ -2,37 +2,67 @@ my-width = 200px;
 my-border = 1px;
 
 @media (min-width: 800px) {
-  //.container{
-  //  display:flex;
-  //  flex-direction:column-reverse;
-  //}
 
-  .select,
+  .floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 16px;
+    color: gray;
+    transition: 0.2s ease all;
+  }
+
   .input {
-    width: my-width
+    //height: 40px;
+    border: solid 1px gray;
+    border-radius: 10px;
+    color: orange;
+    caret-color: black;
+    padding: 1rem;
+    width: my-width;
+
+    &:focus{
+      outline: none;
+    }
+
+    &:focus ~ .floating-label,
+    &:valid ~ .floating-label{
+      top: -6px;
+      bottom: 5px;
+      left: 20px;
+      font-size: 11px;
+      opacity: 1;
+      color: black;
+      height: 16px;
+      background: white;
+    }
   }
 
-  // Отображает выпадающий список
-  .select:hover > .sub-menu {
-    display:block;
-    color:#fff;
-    border: solid my-border black;
+  .select {
+    width: my-width;
 
-    // основной цвет фона списка
-    padding-left:0;
-    background: #ffffff;
-  }
+    // Отображает выпадающий список
+    &:hover > .sub-menu {
+      display:block;
+      color:#fff;
+      border: solid my-border black;
 
-  // Шрифт в списке
-  .select:hover > .sub-menu a{
-    color: #000000;
+      // основной цвет фона списка
+      padding-left:0;
+      background: #ffffff;
+
+      // Шрифт в списке
+      a{
+        color: #000000;
+      }
+    }
   }
 
   // Стили выпадающего меню
   .sub-menu {
     // Скрывает список сперва
-    //display: none;
-    display:block;
+    display: none;
+    //display:block;
     color:#fff;
     border: solid my-border black;
     position:absolute;
@@ -46,22 +76,22 @@ my-border = 1px;
       width: my-width + 2 * my-border;
       list-style-type:none;
 
-      .highlight {
-        color: orange;
+      a{
+        display:flex;
+        text-align:center;
+        text-decoration:none;
+        color:#777;
+        padding:1rem;
+
+        &:hover {
+          background: #777;
+          color: #fff;
+        }
+
+        .highlight {
+          color: orange;
+        }
       }
-    }
-
-    li a{
-      display:flex;
-      text-align:center;
-      text-decoration:none;
-      color:#777;
-      padding:1rem;
-    }
-
-    li a:hover{
-      background:#777;
-      color:#fff;
     }
   }
 

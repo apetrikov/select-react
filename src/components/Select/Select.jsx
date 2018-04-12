@@ -20,16 +20,17 @@ const Select = ({ orderedList = [], search = '', onInput}) => {
     : null;
 
   return (
-    <div className="container">
-      <div className="select">
-        <input
-          type="text"
-          className="input"
-          placeholder="Выберите страну"
-          value={search}
-          onInput={(e) => onInput(e.target.value)}/>
-        {dropdown}
-      </div>
+    <div className="select">
+      <input
+        type="text"
+        className="input"
+        value={search}
+        pattern=".*"
+        maxLength="16"
+        required
+        onInput={(e) => onInput(e.target.value)}/>
+      <span className="floating-label">Выберите страну</span>
+      {dropdown}
     </div>
   );
 };
