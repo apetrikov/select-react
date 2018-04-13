@@ -1,5 +1,5 @@
-my-height = 50px;
-my-width = 200px;
+defHeight = 40px;
+defWidth = 200px;
 my-border = 1px;
 
 @media (min-width: 800px) {
@@ -14,12 +14,12 @@ my-border = 1px;
   }
 
   .input {
-    //height: 40px;
+    height: 15px;
     border: solid 1px gray;
     border-radius: 10px;
     color: orange;
     caret-color: black;
-    padding: 1rem;
+    padding: 15px;
     width: my-width;
 
     &:focus{
@@ -39,12 +39,35 @@ my-border = 1px;
       padding-right: 5px;
       background: white;
     }
+
+    &.up:focus ~ .floating-label,
+    &.up:valid ~ .floating-label{
+      display: none;
+    }
+
+    &:focus ~ .sub-menu,
+    &:valid ~ .sub-menu{
+      display:block;
+      color:#fff;
+      border: solid my-border black;
+
+      // основной цвет фона списка
+      padding-left:0;
+      background: #ffffff;
+
+      // Шрифт в списке
+      a{
+        color: #000000;
+      }
+    }
+
   }
 
   .select {
-    width: my-width;
+    position: relative;
+    width: defWidth;
 
-    // Отображает выпадающий список
+    // Чтобы отображалось при наведении, чтобы срабатывало событие
     &:hover > .sub-menu {
       display:block;
       color:#fff;
@@ -62,22 +85,32 @@ my-border = 1px;
   }
 
   // Стили выпадающего меню
-  .sub-menu {
+  .sub-menu{
+    position: absolute;
     // Скрывает список сперва
     display: none;
     //display:block;
     color:#fff;
     border: solid my-border black;
-    position:absolute;
 
     margin:0; //reset
     padding:0;
+
     cursor: pointer;
+
+    overflow-y: hidden;
+
+    &.up{
+      bottom: 46px;
+    }
+
+    &.down{
+
+    }
 
     li{
       display:block;
-      height: my-height;
-      width: my-width + 2 * my-border;
+      width: defWidth + 2 * my-border;
       list-style-type:none;
 
       a{
@@ -85,7 +118,7 @@ my-border = 1px;
         text-align:center;
         text-decoration:none;
         color:#777;
-        padding:1rem;
+        padding: 15px;
 
         &:hover {
           background: #777;

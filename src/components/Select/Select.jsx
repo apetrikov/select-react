@@ -16,7 +16,14 @@ class Select extends React.Component{
 
   componentDidMount() {
     this.updateWindowHeight();
+    // window.addEventListener("scroll", this.updateWindowHeight.bind(this));
+    // window.addEventListener("resize", this.updateWindowHeight.bind(this));
   };
+
+  componentWillUnmount() {
+    // window.removeEventListener("scroll", this.updateWindowHeight.bind(this));
+    // window.removeEventListener("resize", this.updateWindowHeight.bind(this));
+  }
 
   updateWindowHeight() {
     const getFreeSpace = () => {
@@ -41,6 +48,8 @@ class Select extends React.Component{
   render() {
     const { orderedList = [], search = '', onInput} = this.props;
 
+    const directionClass = this.chooseDirection(orderedList.length);
+
     const preparedList = orderedList.map((name, i) => {
         const highlight = (str, length) => (<span className="highlight">{str.slice(0, length)}</span>);
         return (
@@ -51,7 +60,7 @@ class Select extends React.Component{
     );
 
     const dropdown = orderedList.length
-      ? (<ul className={`sub-menu ${this.chooseDirection(orderedList.length)}`} ref={this.subMenu}>
+      ? (<ul className={`sub-menu ${directionClass}`} ref={this.subMenu}>
         {preparedList}
       </ul>)
       : null;
@@ -60,7 +69,7 @@ class Select extends React.Component{
       <div className="select">
         <input
           type="text"
-          className="input"
+          className={`input ${directionClass}`}
           value={search}
           pattern=".*"
           maxLength="16"
