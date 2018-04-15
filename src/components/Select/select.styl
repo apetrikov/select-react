@@ -1,36 +1,49 @@
-defHeight = 40px;
-defWidth = 200px;
-my-border = 1px;
+input-height = 15px;
+input-padding = 15px;
+input-width = 200px;
+input-border = 1px;
 
-@media (min-width: 800px) {
+defHight = input-height + 2 * (input-padding + input-border);
+defWidth = input-width + 2 * input-padding;
+defBorder = input-border solid gray;
+defRadius = 5px;
+
+@media (min-width: 300px) {
+
+  .select-container{
+    width: select-width;
+    height: select-height;
+  }
 
   .floating-label {
     position: absolute;
+    color: gray;
+
     pointer-events: none;
     left: 20px;
     top: 16px;
-    color: gray;
+
     transition: 0.2s ease all;
   }
 
   .input {
-    height: 15px;
-    border: solid 1px gray;
-    border-radius: 10px;
+    height: input-height;
+    padding: input-padding;
+    width: input-width;
+    border: defBorder;
+    border-radius defRadius;
     color: orange;
     caret-color: black;
-    padding: 15px;
-    width: my-width;
 
     &:focus{
       outline: none;
     }
 
     &:focus ~ .floating-label,
-    &:valid ~ .floating-label{
+    &:valid ~ .floating-label {
       top: -6px;
       bottom: 5px;
-      left: 20px;
+      left: 15px;
       font-size: 11px;
       opacity: 1;
       color: black;
@@ -38,18 +51,32 @@ my-border = 1px;
       padding-left: 5px;
       padding-right: 5px;
       background: white;
+
+      &.up{
+        display none
+      }
     }
 
-    &.up:focus ~ .floating-label,
-    &.up:valid ~ .floating-label{
-      display: none;
+    // скругление углов
+    &.up:focus,
+    &.up:valid{
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: defRadius;
+      border-bottom-right-radius: defRadius;
+    }
+
+    &.down:focus,
+    &.down:valid{
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: defRadius;
+      border-top-right-radius: defRadius;
     }
 
     &:focus ~ .sub-menu,
     &:valid ~ .sub-menu{
       display:block;
-      color:#fff;
-      border: solid my-border black;
 
       // основной цвет фона списка
       padding-left:0;
@@ -67,21 +94,11 @@ my-border = 1px;
     position: relative;
     width: defWidth;
 
-    // Чтобы отображалось при наведении, чтобы срабатывало событие
-    &:hover > .sub-menu {
-      display:block;
-      color:#fff;
-      border: solid my-border black;
-
-      // основной цвет фона списка
-      padding-left:0;
-      background: #ffffff;
-
-      // Шрифт в списке
-      a{
-        color: #000000;
-      }
-    }
+     //Чтобы отображалось при наведении, чтобы срабатывало событие
+    //&:hover > .sub-menu {
+    //  display:block;
+    //
+    //}
   }
 
   // Стили выпадающего меню
@@ -91,26 +108,30 @@ my-border = 1px;
     display: none;
     //display:block;
     color:#fff;
-    border: solid my-border black;
+    border: defBorder;
 
     margin:0; //reset
     padding:0;
 
     cursor: pointer;
 
-    overflow-y: hidden;
-
+    // скругление углов
+    &.up,
     &.up{
       bottom: 46px;
+      border-top-left-radius: defRadius;
+      border-top-right-radius: defRadius;
     }
 
+    &.down,
     &.down{
-
+      border-bottom-left-radius: defRadius;
+      border-bottom-right-radius: defRadius;
     }
 
     li{
       display:block;
-      width: defWidth + 2 * my-border;
+      width: defWidth;
       list-style-type:none;
 
       a{
@@ -118,7 +139,7 @@ my-border = 1px;
         text-align:center;
         text-decoration:none;
         color:#777;
-        padding: 15px;
+        padding: input-padding;
 
         &:hover {
           background: #777;
@@ -127,8 +148,26 @@ my-border = 1px;
 
         .highlight {
           color: orange;
+          text-decoration underline
         }
       }
+    }
+
+    &:hover{
+     display:block;
+    }
+
+    &:hover ~ .floating-label.down {
+      top: -6px;
+      bottom: 5px;
+      left: 15px;
+      font-size: 11px;
+      opacity: 1;
+      color: black;
+      height: 16px;
+      padding-left: 5px;
+      padding-right: 5px;
+      background: white;
     }
   }
 

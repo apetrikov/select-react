@@ -6,6 +6,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: ['src/components', 'node_modules']
@@ -28,7 +29,7 @@ module.exports = {
             loader: 'stylus-loader'
           }
         ]
-      }
+      },
     ]
   },
   plugins: [htmlPlugin]
