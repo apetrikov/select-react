@@ -12,26 +12,14 @@ class Select extends React.Component{
     this.customSelect = React.createRef();
   }
 
-  componentDidMount() {
-    document.addEventListener("click", this.handleOutsideClick.bind(this));
-  };
+  componentDidMount = () => document.addEventListener("click", this.handleOutsideClick);
+  componentWillUnmount = () => document.removeEventListener("click", this.handleOutsideClick);
 
-  componentWillUnmount() {
-    document.removeEventListener("click", this.handleOutsideClick.bind(this));
-  }
-
-  handleOutsideClick(e) {
+  handleOutsideClick = (e) => {
     // Только если компонент открыт
     const outside = !e.path.includes(this.customSelect.current);
-    if(outside && this.props.isOpened){
-
-      // Нажали мимо
-      console.log('мимо');
-      if (this.props.isOpened) console.log('закрываем');
-      if (this.props.isOpened) this.toggleList(e);
-
-    }
-  }
+    outside && this.props.isOpened && this.toggleList(e);
+  };
 
   toggleList = (e) => {
     this.props.onToggle();
@@ -39,7 +27,6 @@ class Select extends React.Component{
 
   onEnter = e => {
     if(e.key === 'Enter'){
-      console.log(e.key);
       this.props.onToggle();
       this.inputField.current.blur();
     }
@@ -76,26 +63,24 @@ class Select extends React.Component{
         : <ArrowDown className='custom-select__icon icon' onClick={onClick}/>;
     };
 
+    const inputClass = `custom-select__input ${(isList && isOpened) ? 'custom-select__input_'+direction : ''}`;
+    const labelClass = `custom-select__floating-label ${(isOpened || search.length) ? 'custom-select__floating-label_'+direction : ''}`;
 
     return (
       <div className="custom-select" ref={this.customSelect}>
         <input
           type="text"
-          className={`custom-select__input ${(isList && isOpened) ? 'custom-select__input_'+direction : ''}`}
+          className={inputClass}
           value={search}
           pattern=".*"
           maxLength="16"
           required
           ref={this.inputField}
-          onClick={e => {
-            // e.stopPropagation();
-            // console.log('событие селекта поймано, мой генерал!');
-            !isOpened && this.toggleList(e);
-          }}
+          onClick={e => !isOpened && this.toggleList(e)}
           onKeyPress={this.onEnter}
           onInput={(e) => onInput(e.target.value)}/>
         {isOpened && dropdown}
-        <span className={`custom-select__floating-label ${(isOpened || search.length) ? 'custom-select__floating-label_'+direction : ''}`}>Выберите страну</span>
+        <span className={labelClass}>Выберите страну</span>
         <span >{chooseArrow()}</span>
       </div>
     )
