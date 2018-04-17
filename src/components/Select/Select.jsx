@@ -8,33 +8,42 @@ class Select extends React.Component{
   constructor(props){
     super(props);
 
+    this.inputField = React.createRef();
+    this.customSelect = React.createRef();
   }
 
   componentDidMount() {
-    document.addEventListener("click", this.handleOutsideClick.bind(this), false);
+    document.addEventListener("click", this.handleOutsideClick.bind(this));
   };
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleOutsideClick.bind(this), false);
+    document.removeEventListener("click", this.handleOutsideClick.bind(this));
   }
 
   handleOutsideClick(e) {
-    e.stopPropagation();
-    // console.log(this.props.isOpened);
-    // Нажали input списка
-    const validElement = ({classList}) => classList.contains('custom-select__input') || classList.contains('custom-select__icon');
-    if (validElement(e.toElement)) {
-      // console.log('событие!');
-      // if (!this.props.isOpened) console.log('открываем');
-      if (!this.props.isOpened) this.props.onToggle();
-      return;
-    }
+    // Только если компонент открыт
+    const outside = !e.path.includes(this.customSelect.current);
+    if(outside && this.props.isOpened){
 
-    // Нажали мимо
-    // console.log('мимо');
-    // if (this.props.isOpened) console.log('закрываем');
-    if (this.props.isOpened) this.props.onToggle();
+      // Нажали мимо
+      console.log('мимо');
+      if (this.props.isOpened) console.log('закрываем');
+      if (this.props.isOpened) this.toggleList(e);
+
+    }
   }
+
+  toggleList = (e) => {
+    this.props.onToggle();
+  };
+
+  onEnter = e => {
+    if(e.key === 'Enter'){
+      console.log(e.key);
+      this.props.onToggle();
+      this.inputField.current.blur();
+    }
+  };
 
   render() {
     const { orderedList = [], search = '', direction = 'down', isOpened, onInput, onToggle} = this.props;
@@ -42,7 +51,7 @@ class Select extends React.Component{
     const preparedList = orderedList.map((name, i) => {
         const highlight = (str, length) => (<span className="highlight">{str.slice(0, length)}</span>);
         return (
-          <li className={'sub-menu__item'} key={i} onClick={e => {e.stopPropagation(); onInput(name)}}>
+          <li className={'sub-menu__item'} key={i} onClick={e => {e.stopPropagation(); onInput(name); onToggle()}}>
             <a className="menuItem">{highlight(name, search.length)}{name.slice(search.length)}</a>
           </li>)
       }
@@ -56,24 +65,38 @@ class Select extends React.Component{
       </ul>)
       : null;
 
-    const chooseArrow = direction === 'up'
-      ? <ArrowUp className='custom-select__icon icon' />
-      : <ArrowDown className='custom-select__icon icon'/>;
+    const chooseArrow = () => {
+      const onClick = () => {
+        // console.log('По стрелочке кликнули!');
+        !isOpened && this.toggleList();
+        this.inputField.current.focus()
+      };
+      return direction === 'up'
+        ? <ArrowUp className='custom-select__icon icon' onClick={onClick}/>
+        : <ArrowDown className='custom-select__icon icon' onClick={onClick}/>;
+    };
 
 
     return (
-      <div className="custom-select">
+      <div className="custom-select" ref={this.customSelect}>
         <input
           type="text"
-          className={`custom-select__input ${isOpened ? 'custom-select__input_'+direction : ''}`}
+          className={`custom-select__input ${(isList && isOpened) ? 'custom-select__input_'+direction : ''}`}
           value={search}
           pattern=".*"
           maxLength="16"
           required
+          ref={this.inputField}
+          onClick={e => {
+            // e.stopPropagation();
+            // console.log('событие селекта поймано, мой генерал!');
+            !isOpened && this.toggleList(e);
+          }}
+          onKeyPress={this.onEnter}
           onInput={(e) => onInput(e.target.value)}/>
         {isOpened && dropdown}
         <span className={`custom-select__floating-label ${(isOpened || search.length) ? 'custom-select__floating-label_'+direction : ''}`}>Выберите страну</span>
-        <span >{chooseArrow}</span>
+        <span >{chooseArrow()}</span>
       </div>
     )
   }
