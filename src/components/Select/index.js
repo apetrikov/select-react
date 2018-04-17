@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from "react";
 
-import { onInput }  from './module';
+import { onInput, onToggle }  from './module';
 import Select from './Select';
 
 class SelectContainer extends React.Component{
@@ -54,10 +54,11 @@ class SelectContainer extends React.Component{
 }
 
 function mapStateToProps(state) {
-  const { list = ['Список пуст'], search = '' } = state.select;
+  const { list = ['Список пуст'], search = '', isOpened = false } = state.select;
   const filteredList = list.filter(name => name.toLowerCase().startsWith(search.toLowerCase()));
   const orderedList = filteredList.sort();
   return {
+    isOpened,
     orderedList,
     search
   };
@@ -65,7 +66,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInput: value => dispatch(onInput(value))
+    onInput: value => dispatch(onInput(value)),
+    onToggle: () => dispatch(onToggle())
   };
 }
 

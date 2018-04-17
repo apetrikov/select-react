@@ -3,12 +3,17 @@ import _ from 'lodash';
 // Constants
 
 const CHANGE_INPUT = 'CHANGE_INPUT';
+const TOGGLE_INPUT = 'TOGGLE_INPUT';
 
 // Actions
 
 export const onInput = (value) => ({
   type: CHANGE_INPUT,
   value
+});
+
+export const onToggle = () => ({
+  type: TOGGLE_INPUT,
 });
 
 // Reducer
@@ -23,16 +28,18 @@ export const initialState = {
     'Алжир',
     'Американсое Самоа',
   ],
-  search: ''
+  search: '',
+  isOpened: false,
 };
 
 export const select = (state = initialState, action) => {
   switch (action.type){
     case CHANGE_INPUT:
-      const newState = _.cloneDeep(state);
-      const { value } = action;
-      newState.search = value;
-      return newState;
+      // console.log('Изменение ввода');
+      return { ...state, search: action.value}
+    case TOGGLE_INPUT:
+      // console.log('Изменение состояния');
+      return { ...state, isOpened: !state.isOpened}
     default:
       return state;
   }

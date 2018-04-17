@@ -58,16 +58,16 @@ defRadius = 5px;
     }
 
     // скругление углов
-    &.up:focus,
-    &.up:valid{
+    &.up.list:focus,
+    &.up.list:valid{
       border-top-left-radius: 0px;
       border-top-right-radius: 0px;
       border-bottom-left-radius: defRadius;
       border-bottom-right-radius: defRadius;
     }
 
-    &.down:focus,
-    &.down:valid{
+    &.down.list:focus,
+    &.down.list:valid{
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
       border-top-left-radius: defRadius;
@@ -171,6 +171,13 @@ defRadius = 5px;
       padding-right: 5px;
       background: white;
     }
+  }
+
+  .arrow{
+    position absolute
+    top 14px
+    right 10px
+    //z-index: 10
   }
 
 }
