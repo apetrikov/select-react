@@ -20,24 +20,19 @@ class Select extends React.Component{
 
   handleOutsideClick(e) {
     e.stopPropagation();
-    console.log(this.props.isOpened);
+    // console.log(this.props.isOpened);
     // Нажали input списка
-    const validElement = ({classList}) => classList.contains('input') || classList.contains('svg');
+    const validElement = ({classList}) => classList.contains('custom-select__input') || classList.contains('custom-select__icon');
     if (validElement(e.toElement)) {
-      console.log('событие!');
-      if (!this.props.isOpened) console.log('открываем');
+      // console.log('событие!');
+      // if (!this.props.isOpened) console.log('открываем');
       if (!this.props.isOpened) this.props.onToggle();
       return;
     }
 
-    // По клику меню не закрываем
-    if (e.toElement.classList.contains('menuItem')){
-      return;
-    }
-
     // Нажали мимо
-    console.log('мимо');
-    if (this.props.isOpened) console.log('закрываем');
+    // console.log('мимо');
+    // if (this.props.isOpened) console.log('закрываем');
     if (this.props.isOpened) this.props.onToggle();
   }
 
@@ -47,7 +42,7 @@ class Select extends React.Component{
     const preparedList = orderedList.map((name, i) => {
         const highlight = (str, length) => (<span className="highlight">{str.slice(0, length)}</span>);
         return (
-          <li key={i} onClick={e => {e.stopPropagation(); onInput(name)}}>
+          <li className={'sub-menu__item'} key={i} onClick={e => {e.stopPropagation(); onInput(name)}}>
             <a className="menuItem">{highlight(name, search.length)}{name.slice(search.length)}</a>
           </li>)
       }
@@ -56,29 +51,29 @@ class Select extends React.Component{
     const isList = !!orderedList.length;
 
     const dropdown = isList
-      ? (<ul className={`sub-menu ${direction}`} ref={this.subMenu}>
+      ? (<ul className={`sub-menu custom-select__sub-menu sub-menu_${direction}`} ref={this.subMenu}>
         {preparedList}
       </ul>)
       : null;
 
     const chooseArrow = direction === 'up'
-      ? <ArrowUp className='svg' />
-      : <ArrowDown className='svg'/>;
+      ? <ArrowUp className='custom-select__icon icon' />
+      : <ArrowDown className='custom-select__icon icon'/>;
 
 
     return (
-      <div className="select">
+      <div className="custom-select">
         <input
           type="text"
-          className={`input ${direction} ${isList ? 'list' : null}`}
+          className={`custom-select__input ${isOpened ? 'custom-select__input_'+direction : ''}`}
           value={search}
           pattern=".*"
           maxLength="16"
           required
           onInput={(e) => onInput(e.target.value)}/>
-        {dropdown}
-        <span className={`floating-label ${direction}`}>Выберите страну</span>
-        <span className={`arrow svg ${direction}`}>{chooseArrow}</span>
+        {isOpened && dropdown}
+        <span className={`custom-select__floating-label ${(isOpened || search.length) ? 'custom-select__floating-label_'+direction : ''}`}>Выберите страну</span>
+        <span >{chooseArrow}</span>
       </div>
     )
   }
