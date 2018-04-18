@@ -1,9 +1,12 @@
 import { connect } from 'react-redux';
 import React from "react";
+import device from 'current-device';
 
 import { onInput, onToggle }  from './module';
 import Select from './Select';
 
+
+// Техниееский компонент для определения места на странице
 class SelectContainer extends React.Component{
   constructor(props){
     super(props);
@@ -49,6 +52,9 @@ class SelectContainer extends React.Component{
         <datalist id={"data1"}>
           {this.props.orderedList.map((item, i) => (<option key={i} value={item}></option>))}
         </datalist>
+        <select>
+          {this.props.orderedList.map((item, i) => (<option key={i} value={item}>{item}</option>))}
+        </select>
       </div>
     )
   }
@@ -58,10 +64,14 @@ function mapStateToProps(state) {
   const { list = ['Список пуст'], search = '', isOpened = false } = state.select;
   const filteredList = list.filter(name => name.toLowerCase().startsWith(search.toLowerCase()));
   const orderedList = filteredList.sort();
+  const isDesktop = device.type === 'desktop';
+
+  console.log(isDesktop);
   return {
     isOpened,
     orderedList,
-    search
+    search,
+    isDesktop,
   };
 }
 
