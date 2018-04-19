@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 // Constants
 
 const CHANGE_INPUT = 'CHANGE_INPUT';
@@ -26,7 +24,7 @@ export const initialState = {
     'Азербайджан',
     'Албания',
     'Алжир',
-    'Американсое Самоа',
+    'Американское Самоа',
   ],
   search: '',
   isOpened: false,

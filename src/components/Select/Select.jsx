@@ -4,6 +4,7 @@ import ArrowUp from 'material-ui/svg-icons/navigation/arrow-drop-up';
 import ArrowDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import style from './select.styl';
 
+// Десктопный компонент красивого списка
 class Select extends React.Component{
   constructor(props){
     super(props);
@@ -54,7 +55,6 @@ class Select extends React.Component{
 
     const chooseArrow = () => {
       const onClick = () => {
-        // console.log('По стрелочке кликнули!');
         !isOpened && this.toggleList();
         this.inputField.current.focus()
       };

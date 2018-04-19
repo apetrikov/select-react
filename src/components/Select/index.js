@@ -6,7 +6,8 @@ import { onInput, onToggle }  from './module';
 import Select from './Select';
 
 
-// Техниееский компонент для определения места на странице
+// Технический компонент для определения места на странице
+// и вывода правильного селекта
 class SelectContainer extends React.Component{
   constructor(props){
     super(props);
