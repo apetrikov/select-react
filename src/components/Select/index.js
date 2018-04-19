@@ -21,17 +21,16 @@ class SelectContainer extends React.Component{
 
   componentDidMount() {
     const direction = this.chooseDirection();
-    this.setState({ direction });
-    window.addEventListener("scroll", this.chooseDirection.bind(this));
-    window.addEventListener("resize", this.chooseDirection.bind(this));
+    window.addEventListener("scroll", this.chooseDirection);
+    window.addEventListener("resize", this.chooseDirection);
   };
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.chooseDirection.bind(this));
-    window.removeEventListener("resize", this.chooseDirection.bind(this));
+    window.removeEventListener("scroll", this.chooseDirection);
+    window.removeEventListener("resize", this.chooseDirection);
   }
 
-  chooseDirection() {
+  chooseDirection = () => {
     const getToBottom = () => {
       const { bottom } = this.selectContainer.current.getBoundingClientRect();
       const height = window.innerHeight;
@@ -39,8 +38,11 @@ class SelectContainer extends React.Component{
     };
     const { length } = this.props.orderedList;
     const submenuHeight = length * 50; // фиксированная высота 50 px
-    if (submenuHeight >= getToBottom()) return 'up';
-    return 'down';
+    if (submenuHeight >= getToBottom()){
+      this.setState({ direction: "up" });
+    } else {
+      this.setState({ direction: "down" })
+    }
   };
 
   render() {
