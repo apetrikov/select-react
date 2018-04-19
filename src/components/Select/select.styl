@@ -8,80 +8,88 @@ defWidth = input-width + 2 * input-padding;
 defBorder = input-border solid gray;
 defRadius = 5px;
 
-@media (min-width: 300px) {
+.select-container{
+  width: select-width;
+  height: select-height;
+}
 
-  .select-container{
-    width: select-width;
-    height: select-height;
-  }
+.select-mobile {
+  width: 232px;
+  height: 46px;
+  padding: 10px 35px 10px 15px;
+  font-size: 14px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: black;
+  background: url(./arrow_down.png) 96% no-repeat white;
+  background-size: 25px;
+}
 
-  .custom-select__floating-label {
+.custom-select {
+  position: relative;
+  width: defWidth;
+
+   &__floating-label {
     position: absolute;
-    color: gray;
-
-    pointer-events: none;
-    left: 20px;
-    top: 16px;
-
-    transition: 0.2s ease all;
-  }
-
-  .custom-select__floating-label_up {
-    display none
-  }
-
-  .custom-select__floating-label_down {
-    top: -6px;
-    bottom: 5px;
-    left: 15px;
-    font-size: 11px;
-    opacity: 1;
     color: black;
-    height: 16px;
-    padding-left: 5px;
-    padding-right: 5px;
-    background: white;
+    pointer-events: none;
+    left: 16px;
+    top: 16px;
+    font: 400 14px Arial;
+    transition: 0.2s ease all;
+
+    &_up{
+      display none
+    }
+
+    &_down {
+      top: -6px;
+      bottom: 5px;
+      left: 10px;
+      font-size: 14px;
+      opacity: 1;
+      color: black;
+      height: 16px;
+      padding-left: 5px;
+      padding-right: 5px;
+      background: white;
+    }
   }
 
-  .custom-select__input {
+  &__input {
     height: input-height;
     padding: input-padding;
     width: input-width;
     border: defBorder;
     border-radius defRadius;
-    color: orange;
+    color: black;
     caret-color: black;
 
     &:focus{
       outline: none;
     }
-  }
 
-  .custom-select__input_down{
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-top-left-radius: defRadius;
-    border-top-right-radius: defRadius;
-  }
+    &_down{
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: defRadius;
+      border-top-right-radius: defRadius;
+    }
 
-  .custom-select__input_up{
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: defRadius;
-    border-bottom-right-radius: defRadius;
+    &_up{
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: defRadius;
+      border-bottom-right-radius: defRadius;
+    }
   }
-
-  .custom-select {
-    position: relative;
-    width: defWidth;
-  }
-
   // Стили выпадающего меню
   .sub-menu{
     position: absolute;
-    // Скрывает список сперва
     display: none;
-    //display:block;
     background: #ffffff;
     color:#fff;
     border: defBorder;
@@ -112,7 +120,7 @@ defRadius = 5px;
       width: defWidth;
       list-style-type:none;
 
-      a{
+      &-link{
         display:flex;
         text-align:center;
         text-decoration:none;
@@ -120,17 +128,16 @@ defRadius = 5px;
         padding: input-padding;
 
         &:hover {
-          background: #777;
-          color: #fff;
-        }
-
-        .highlight {
+          background: gray;
           color: orange;
-          text-decoration underline
         }
       }
     }
+  }
 
+  .highlight {
+    color: orange;
+    text-decoration underline
   }
 
   .custom-select__icon{
@@ -138,19 +145,4 @@ defRadius = 5px;
     top 14px
     right 10px
   }
-
-}
-
-.select-mobile {
-  width: 232px;
-  height: 46px;
-  padding: 10px 35px 10px 15px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  color: black;
-  background: url(./arrow_down.png) 96% / 15% no-repeat white;
 }

@@ -43,14 +43,22 @@ class SelectContainer extends React.Component{
   };
 
   render() {
-    // TODO решить, что рендерить - кастомный или мобильный селект
+    const { isDesktop } = this.props;
+    const getMobileSelect = () => (
+      <select
+        className="select-mobile"
+        value={this.props.search}
+        onChange={e => this.props.onInput(e.target.value)}>
+        <option hidden key={0}>Выберите страну</option>
+        {this.props.orderedList.map((item, i) => (<option key={i+1} value={item}>{item}</option>))}
+      </select>
+    );
+
     return(
       <div className="select-container" ref={this.selectContainer}>
-        <Select {...this.props} direction={this.state.direction}/>
-        {/*удалить блок ниже!*/}
-        <select className="select-mobile">
-          {this.props.orderedList.map((item, i) => (<option key={i} value={item}>{item}</option>))}
-        </select>
+        {isDesktop
+        ? <Select {...this.props} direction={this.state.direction}/>
+        : getMobileSelect()}
       </div>
     )
   }

@@ -39,7 +39,7 @@ class Select extends React.Component{
         const highlight = (str, length) => (<span className="highlight">{str.slice(0, length)}</span>);
         return (
           <li className={'sub-menu__item'} key={i} onClick={e => {e.stopPropagation(); onInput(name); onToggle()}}>
-            <a className="menuItem">{highlight(name, search.length)}{name.slice(search.length)}</a>
+            <a className="sub-menu__item-link">{highlight(name, search.length)}{name.slice(search.length)}</a>
           </li>)
       }
     );
