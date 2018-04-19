@@ -48,11 +48,7 @@ class SelectContainer extends React.Component{
       <div className="select-container" ref={this.selectContainer}>
         <Select {...this.props} direction={this.state.direction}/>
         {/*удалить блок ниже!*/}
-        <input type="text" list="data1" />
-        <datalist id={"data1"}>
-          {this.props.orderedList.map((item, i) => (<option key={i} value={item}></option>))}
-        </datalist>
-        <select>
+        <select className="select-mobile">
           {this.props.orderedList.map((item, i) => (<option key={i} value={item}>{item}</option>))}
         </select>
       </div>
